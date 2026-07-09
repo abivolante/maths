@@ -1,0 +1,285 @@
+\documentclass[a4paper, 12pt]
+{article}
+\usepackage{amsmath, amssymb}
+
+\usepackage{pifont}
+\usepackage{enumitem}
+\newlist{checklist}{itemize}{1}
+\setlist[checklist]{label=$\square$}
+
+\newcommand{\zn}{\mathbb{Z}/ N\mathbb{Z}}
+\newcommand{\ls}[2]{\bigg(\frac{#1}{#2}\bigg)}
+\begin{document}
+	\textbf{Math 328 Number Theory}
+	
+	Personal revision notes I made for the LU 2025-2026 Math 321 exams.
+	
+	\hfill
+	
+	\underline{Revision Checklist:}
+	\begin{checklist}
+		\item Solve linear Diophantine equations
+		\item Simple proofs:  Characterisation of solutions
+		\item Named theorems: Wilson', Fermat's, Chinese Remainder, Law of Quadratic Reciprocity
+		\item Solve simultaneous congruence equations using the Chinese Remainder Theorem
+		\item Calculate Legendre Symbol
+		\item Solve quadratic congruence equations 
+		\item Calculate reduced form of  a BQR
+		\item Calculate continued fraction expansion
+		\item Solve Pell equations, remember characterisation of all solutions
+	
+	\end{checklist}
+	
+	\hfill
+	
+	\textbf{Chapter 1: Arithmetic}
+	
+	\begin{itemize}
+		\item \textbf{Division Algorithm} Let $n/m \in \mathbb{Z}$ with $m>0$. Then, there exist unique $q,r \in \mathbb{Z}$ such that $n=qm+r$ and $0\leq r <m.$
+		
+		\item Use Euclidean's Algorithm to compute $\gcd$ of two integers.
+		
+		\item \textbf{Diophantine Equation} A polynomial equation with integer coefficients that we wish to find integer solutions of.
+		
+		\item How to find solutions to Diophantine Equation $ax + by = c$
+		\begin{enumerate}
+			\item Run Euclidean's algorithm on $a$ and $b$ to calculate their $\gcd$
+			\item Check $\gcd$ divides c
+			\item Reverse Euclidean algorithm
+			\item multiply both sides by a factor to get $c$ on one side
+		\end{enumerate}
+		
+		\newpage
+		\item How to find all solutions to a Diophantine Equation $ax + by = c:$
+	\begin{enumerate}
+		\item Find an integer solution $(x_0,y_0)$ using previous steps. All solutions are given by $(x_0 + \frac{b}{\gcd(a,b)}k, y_0 - \frac{a}{\gcd(a,b)}k)$ for all $k \in \mathbb{Z}$
+	\end{enumerate}
+		
+		\item \textbf{Fundamental Theorem of Arithmetic} Every positive integer has a  prime factorisation, unique up to the order of primes
+	\end{itemize}
+	
+\hfill
+
+\textbf{Chapter 2: Modular Arithmetic}
+
+\begin{itemize}
+	\item Let $N\geq 1.$ For any $\bar{a}, \bar{b} \in \mathbb{Z}/ N\mathbb{Z}$
+	\begin{itemize}
+		\item $\overline{a+b} = \bar{a} + \bar{b}$
+		\item $\overline{ab} = \bar{a}\bar{b}$
+		\item $\overline{a^n}  = \bar{a}^n$
+	\end{itemize}
+	
+	\item How to find solutions $x \in \mathbb{Z}/ N\mathbb{Z}$ to $ax \equiv 1 \mod N,$ ie., $a^{-1}$ the multiplicative inverse of $a$ modulo $N$
+		\begin{enumerate}
+		\item Use theorem: The congruence $ax \equiv b \mod N$ has a solution iff $\gcd(a,N)|b.$ So $a$ has an inverse iff $a$ and $N$ are coprime.
+	\end{enumerate} 
+	
+	\item How to find solutions to a general congruence equation $ax \equiv b \mod N$
+	\begin{enumerate}
+		\item Find $a^{-1}$
+		\item Multiply both sides by $a^{-1}$
+	\end{enumerate}
+	
+	\item \textbf{Multiplicative Group Modulo N} Group consisting of a subset of $\mathbb{Z}/ N\mathbb{Z}$  that has a multiplicative inverse modulo N.
+	
+	\item \textbf{Wilson's Theorem} For $p$ prime, $(p-1)!  \equiv -1 \mod p$
+	
+	\item \textbf{Fermat's Little Theorem} Let $p$ be prime and $a \in \mathbb{Z}.$ If $a$ and $p$ are coprime then $a^{p-1} \equiv 1 \mod p.$ (The powers of $a \mod p$ repeat every $p-1$)
+	
+	Use Wilson's theorem to prove this.
+	
+	\item \textbf{Chinese Remainder Theorem} Suppose $N_1, N_2, \cdots, N_m \geq 1$ are pairwise coprime and that $a_1, a_2, \cdots, a_m \in \mathbb{Z}.$ Then there exists unique $a$ such that 
+	$$x \equiv a \mod N_1 \cdots N_m \iff x \equiv a_i \mod N_i$$ for all $i$
+	
+	\item How to find such $a$?
+	\begin{enumerate}
+		\item Write $S_i = \prod_{j \not=i}N_j$ and $b_i = S_i^{-1} \mod N_i$
+		\item Let $a = \sum_{i=1}^{m} S_ib_ia_i$
+	\end{enumerate}
+\end{itemize}
+
+\hfill 
+
+\textbf{Chapter 3: Quadratic Residues}
+\begin{itemize}
+	\item \textbf{Quadratic Residue} Let $N \geq 1.$ Then $a \in \zn$ s a quadratic residue if $(\exists b \in \zn)(b^2 =a)$
+	
+	We study QR mod primes
+	
+	$R_p$ denote the set of non-zero quadratic residues in $\zn$ and $S_p$ denote the set of quadratic non-residues
+	
+	\item $n$ is a QR $\mod N$ iff $n$ is a QR $\mod p$ for all primes $p$ dividing $N.$
+	
+	\item \textbf{Legendre Symbol} Let $p$ be an odd prime and $a \in \mathbb{Z}$ be such that $a$ and $p$ are coprime. Then, the Legendre symbol $\ls{a}{p} \in \{\pm 1\}$ is defined by 
+\begin{equation*}
+	\ls{a}{p} = \begin{cases}
+		1 & \quad a \in R_p, \\
+		-1 & \quad a \in S_p.
+	\end{cases}
+	\end{equation*}
+	
+	\hfill
+	
+	\item Properties of the Legendre Symbol
+	\begin{itemize}
+		\item $a \equiv b \mod p \implies \ls{a}{p} = \ls{b}{p}$
+		\item $a,b \in \mathbb{Z} \implies \ls{ab}{p} =\ls{a}{p} \ls{b}{p}$
+	\end{itemize}
+	
+	
+	\item \textbf{Euler's Criterion} Let $p$ be an odd prime and $a \in \mathbb{Z}$ such that $a$ and $p$ are coprime. Then,
+	
+	\begin{equation*}
+		a^\frac{p-1}{2} \equiv \ls{a}{p}\mod p
+	\end{equation*}
+	
+	\item \textbf{Quadratic Reciprocity} Let $p,q \geq 1$ be odd primes. Then 
+	$$\ls{p}{q}= (-1)^{\frac{p-1}{2}\frac{q-1}{2}}\ls{q}{p}$$
+	
+	\newpage
+	
+		\item How to calculate  $\ls{a}{p}$
+	
+	\begin{enumerate}
+		\item  factorise $a$ into a product of primes $\pm \prod_ip_i^{e_i}.$
+		\item Calculate $\ls{-1}{p}.$
+		\item Calculate $\ls{p_i}{p}$ for all $i$
+		\item Use property 2 of legendre symbols
+		\item We can use:
+		\begin{itemize}
+		\item \begin{equation*}
+			\ls{2}{p} =
+			\begin{cases}
+				1 & p \equiv 1,7\mod 8\\
+				-1 & p \equiv 3,5 \mod 8
+			\end{cases}
+		\end{equation*}
+		
+		\item \begin{equation*}
+			\ls{-1}{p} =
+			\begin{cases}
+				1 & p \equiv1 \mod 4\\
+				-1 & p \equiv 3 \mod4
+			\end{cases}
+		\end{equation*}
+		
+		\item Quadratic Reciprocity
+	\end{itemize}
+	\end{enumerate}
+	
+	\item \textbf{Solvability of quadratic congruences}
+	
+	Let $a,b,c \in \mathbb{Z}.$ Suppose $\gcd(2a, N)=1.$ 
+	The congruence $ax^2 +bx +c \equiv 0 \mod N$  has a solution iff for each prime prime power $p_i^{e_i}|N$ and $p_i^{e_i+1} \not | N$ and  $\Delta = b^2 -4ac$ satisfying  $\Delta = p^{a_i}\Delta_i$ for some $a_i$ (ie., $p_i| \Delta$) satisfy either:
+		\begin{itemize}
+			\item $a_i \geq e_i$ or
+			\item $a_i$ is even and $\ls{\Delta_i}{p_i} = 1$
+		\end{itemize}
+		
+		\textit{Note that $a_i$ can be 0 in which case, we check whether $\ls{\Delta}{p_i}=1.$}
+		
+	\end{itemize}
+	
+	\hfill
+	
+	\textbf{Chapter 4: Some quadratic Diophantine Equations}
+	
+	\begin{itemize}
+		\item \textbf{Binary Quadratic Form} Polynomial of the form
+		$$f(x,y) = ax^2 + bxy + cy^2$$
+		
+		\item \textbf{Primitive Solution} Any solution to $f(x,y)=n$ with $\gcd(x,y)=1$ is called a primitive solution.
+		
+		\newpage
+		
+		\item \textbf{Equivalent BQF's} Two BQF's are equivalent if one is a linear transformation of the other and the determinant of the change of matrix transformation if $\pm 1$
+		
+		\item \textbf{Properly equivalent} if the change of matric transformation is 1
+		
+		\item Equivalent BQF's (primitively) represet the same integers
+		
+		\item \textbf{Discriminant} $\Delta = b^2 - 4ac$ when $f(x,y)= ax^2 + bxy +cy^2$
+		
+		\item BQF is positive definite iff $\Delta <0$ and $a,c>0.$
+		
+		\item Let $\Delta$ be negative with $\Delta \equiv 0,1 \mod 4.$ Then $n \in \mathbb{Z}_{>0}$ is primitively represented by some positive definite BQF of discriminant $\Delta$ iff $\Delta \in \mathbb{Z}/4n\mathbb{Z}$ is a quadratic residue
+				
+		\item \textbf{Reduced Form of a BQF} Let $f(x,y)= ax^2 + bxy +cy^2$ be a positive definite BQF. $f(x,y)$ is in reduced form iff:
+		\begin{enumerate}
+			\item $|b| \leq a \leq c$
+			\item $b \geq 0$ whenever $a=|b|$ or $a=c$ 
+		\end{enumerate} 
+		
+		
+		\item Gauss: Every positve definite binary quadratic form is properly equivalent to a unique reduced form 
+		
+		\item Algorithm to find the reduced form of a BQF:
+		\begin{enumerate}
+			\item Define the transformations: (these transformations are proper since the determinant of the change of variables matrix is 1.)
+			
+		\begin{align*}
+			S: (x,y) &\mapsto (-y,x)\\
+			T_n: (x,y) &\mapsto (x-ny, y)
+		\end{align*}
+		
+		\item 
+		\begin{itemize}
+			\item \underline{Case1}: $|b| > a.$  Perform $T_n.$ Choose $n$ such that the transformed values of the coefficients satisfy $|b|>a$
+			\item \underline{Case 2}: $a>c$. Perform S.
+			\item \underline{Case 3}: $|b| \leq a \leq c:$ with $b<0.$  If $a=|b|$ then perform $T_{-1}$. If $a=c$ perform $S$
+		\end{itemize}
+		\end{enumerate}
+		
+		\item \textbf{Class Set} $Cl(\Delta)$ set of positive definite reduced forms of discriminant $\Delta$ 
+		
+		\item Any negative $\Delta$ has finite class set.
+		
+	\end{itemize}
+	
+
+	
+	\hfill
+	
+	\textbf{Chapter 5: Continued Fractions}
+	
+	\begin{itemize}
+		\item \textbf{(Simple) Continued Fraction} Possibly infinite fraction of the form
+		$$[a_0; a_1; a_2; \cdots] = a_0+ \frac{1}{a_1+\frac{1}{a_2+\frac{1}{a_3+ \cdots}}}$$
+		
+		\item \textbf{nth convergent} The nth convergent of $\alpha=[a_0; a_1; a_2; \cdots]$ is 
+		$$C_n = \frac{p_n}{q_n}= [a_0; a_1; \cdots a_n]$$
+		
+		\item \textbf{Pell's Equation} A Diophantine of the form $x^2 -dy^2 = 1$ for a fixed non-square $d>0$
+		
+		\item Any solution $(p,q)$ of a Pell's equation  $x^2 -dy^2 = 1$ has $\frac{p}{q}$ a convergent of continued fraction of $\sqrt{d}$ Converse is not true.
+		
+		\item Important Theorem to find all solutions to a Pell's equation
+		
+		A continued fraction is eventually periodic iff it represents a number of the form $\alpha = a + b \sqrt{d}$ for some $a,b \in \mathbb{Q}$ and some non-square integer $d >0.$
+		
+		Let $d>0$ be a non-square integer and $n$ be the period of the continued fraction of $\sqrt{d}.$ Then, the positive solutions to $x^2 -dy^2 = 1$ are given by the following convergents for $k \geq 1$
+		
+		\begin{equation*}
+			(x,y) = 
+			\begin{cases}
+				(p_{kn-1}, q_{kn-1}) \quad &n\equiv 0 \mod2\\
+				(p_{2kn-1}, q_{2kn-1}) \quad &n\equiv1 \mod 2
+			\end{cases}
+		\end{equation*}
+		
+		\item Easier way to find all solutions if you know one positive solution
+		
+		Let $d>0$ be a non-square integer and suppose that $(a_0, b_0)$ is the smalled positive solution to $x^2 -dy^2 = 1.$ Then all positive solutions $(x,y)$ are given be the coefficients of $(a_0 + b_0 \sqrt{d})^m$ for alll positive integer $m.$ (There are infinitely many solutions)
+		
+		
+		\item How to find solutions to a Pell's equation $x^2 -dy^2 = 1:$
+		
+		\begin{enumerate}
+			\item Compute continued fraction expansion of $\sqrt{d}$
+			\item Either use first theorem or
+			\item Compute convergents until we get a solution to the equation then use second theorem to find the rest of the solutions.
+		\end{enumerate}
+	\end{itemize}
+	
+\end{document}

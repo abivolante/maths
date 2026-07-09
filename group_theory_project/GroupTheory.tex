@@ -1,0 +1,265 @@
+\documentclass[a4 paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, }
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+
+
+\begin{document}
+	\author{Abigail Volante}
+	\title{Orthogonal Group}
+	\maketitle
+	
+	\begin{abstract}
+		A motion is a function $T: \mathbb{R}^n \rightarrow \mathbb{R}^n$ that preserves distance. We prove that any motion in O(n), the set of all motions fixing the origin, is a linear map that preserves inner products. This allows us to describe O(n) in terms of orthogonal matrices.  In addition, we consider the specific group: G =O(2), where we show that any motion in G is either a rotation or a reflection. Finally, we give a description of all the cyclic subgroups of G. 
+	\end{abstract}
+	
+	\section{Introduction}
+	We begin by defining what it means for a function in $\mathbb{R}^n$ to be a motion. 
+	
+	\begin{definition}
+		A \textbf{motion} is a distance-preserving function $T: \mathbb{R}^n \rightarrow \mathbb{R}^n$; that is, $\| Tx -Ty\| = \|x-y\|$ for all $x,y\in \mathbb{R}^n.$
+	\end{definition}
+	
+	Not every motion is a linear map. For example, the motion $T: \mathbb{R}^n \rightarrow \mathbb{R}^n$ defined by $T(x) = x + w$ for all $x\in \mathbb{R}^n$ where $w \not = 0$ is not linear since $T(0) = w \not = 0.$ \cite{rotman} However, if we fix the origin, then the corresponding motion will be linear. This motion is thus called a \textbf{linear isometry}. Doing so will allow us to describe the set of all motions fixing the origin in terms of matrices associated to linear maps. \cite{baker}
+
+
+		\begin{lemma}
+		Every linear isometry preserves inner products. 
+	\end{lemma}
+	\begin{proof}
+		Suppose $T: \mathbb{R}^n \rightarrow \mathbb{R}^n$ is a linear isometry. Let $\vec{x}, \vec{y} \in \mathbb{R}^n.$ Since T is linear,
+		\begin{align*}
+			\|T(x+ y)\|^2 
+			&= \langle T(x+y), T(x+y) \rangle\\
+			& = \langle Tx +Ty, Tx + Ty \rangle \\
+			&= \| Tx \|^2 + 2\langle Tx, Ty \rangle + \|Ty\|^2
+		\end{align*}
+		Since T preserves distances,
+		$$\|x+y\|^2 = \|x\|^2 + 2\langle Tx, Ty \rangle + \|y\|^2.$$
+		But we also have
+		$$\|x+y\|^2 = \|x\|^2 + 2 \langle x, y \rangle + \|y\|^2,$$
+		Therefore,
+		$$\langle Tx, Ty \rangle = \langle x, y \rangle.$$
+	\end{proof}
+	Geometrically, this shows that a transformation that preserves distances and fixes the origin also preserves angles.
+	
+	
+	\begin{definition}
+		A square matrix A is \textbf{orthogonal} if $AA^t = I_n$
+	\end{definition}
+	
+	\begin{lemma}
+		Any matrix A associated to a linear isometry T is orthogonal.
+	\end{lemma}
+
+	\begin{proof}
+		By the definition of the standard inner product, for any $x,y \in \mathbb{R}^n,$
+		
+		$$\langle Ax , Ay \rangle = (Ax)^T(Ay) = (x^TA^T)(Ay) = x^T (A^TA)y.$$
+		
+		Since inner product is preserved, $\langle Ax, Ay \rangle = \langle x, y \rangle = x^TI_ny.$
+		
+		Therefore $A^TA -I_n = 0_n$
+		 
+	\end{proof}
+	 
+	 \begin{lemma}
+	 	Let M be the group of all linear isometries in $\mathbb{R}^n$ where multiplication is defined as composition of maps. Let N be the group consisting of the set of $n \times n$ orthogonal matrices and multiplication is defined as matrix multiplication. Then $$M  \cong N.$$
+	 \end{lemma}
+	 
+	 \begin{proof}
+	 	Since any linear map T in M has an associated orthogonal matrix $A_T$ in N, we can define $f: M \rightarrow N$ by $f(A) = A_T.$ We have
+	 	
+	 	$$f(S\circ T)= A_{S}A_{T} = f(A_S)f(A_T).$$
+	 	for any $x\in \mathbb{R}^n.$ Now, f is a bijection since the associated matrix is unique. Therefore f is an isomorphism and $M \cong N.$
+	 
+	 \end{proof}
+	 Now that we have shown these two groups are isomorphic, we can then  describe the set of all motions fixing the origin as the group of orthogonal matrices where multiplication is defined as  matrix multiplication. This group is also known as the \textbf{Orthogonal Group}, denoted by $O(n).$
+	 
+\vspace{5mm}
+	Now consider G = O(2). Let $A \in G.$ Since A is orthogonal, the columns of A form an orthonormal basis in $\mathbb{R}^2.$ Now, any unit vector $v_1$ in $\mathbb{R}^2$ can be written in the form 
+	$\begin{pmatrix}
+		\cos \theta \\ \sin \theta
+	\end{pmatrix}$
+	for some $\theta.$
+	So, an orthogonal unit vector $v_2$ to $v_1$ must either be of the form:
+	$$\begin{pmatrix}
+		-\sin \theta \\ \cos \theta
+	\end{pmatrix}
+	\quad
+	\text{or}
+	\quad
+	\begin{pmatrix}
+		\sin \theta \\ -\cos \theta
+	\end{pmatrix}.
+	$$
+	Therefore, we can characterize G as a disjoint union of two sets:
+	\begin{align*}
+	\left\{
+	\begin{pmatrix}
+		\cos \theta & -\sin \theta \\ 
+		\sin \theta & \cos \theta
+	\end{pmatrix}:
+	\theta \in [0,2\pi)
+	\right\}
+	\quad
+\text{and}
+	\quad	
+	\left\{
+	\begin{pmatrix}
+		\cos \theta & \sin \theta \\ 
+		\sin \theta & -\cos \theta
+	\end{pmatrix}:
+	\theta \in [0,2\pi)
+	\right\}.
+	\end{align*}
+	\cite{rotman}
+	In a general $n \times n$ orthogonal group, we can partition $O(n)$ into sets:
+	$$O(n)^+ = \{A \in O(n): \det A =1\} \quad \text{and} \quad O(n)^- = \{A \in O(n): \det A =-1\}.$$
+	 The first set forms a subgroup of $O(n)$, called the \textbf{Special Orthogonal Group}. denoted $SO(n).$ \cite{baker}
+	 Geometrically, $O(2)^+$ are rotations by $\theta$ about the origin while $O(2)^-$ are reflections across a line through the origin at an angle of $\theta/2.$
+
+	
+	\section{Verification of Group Axioms}
+	\begin{theorem}
+		The set O(n) with the binary operation $(A,B) \rightarrow AB$ for all $A,B \in G$ is a group.
+	\end{theorem}
+	\begin{proof}
+		To show $O(n)$ is a group, we must first show that the binary operation associated to $O(n)$ is a well-defined function.\vspace{5mm}
+		
+		Let $A,B \in O(n).$ We have $AB(AB)^t = ABB^tA^t = AI_nA^t = AA^t = I_n.$
+		Therefore, $AB \in O(n).$ Now, let $A,B,C,D \in O(n)$ such that $A=C$ and $B =D.$ Then, 
+		$AB = AD = CD.$ Therefore, the binary operation is well defined.
+		
+		Next, we show that the three axioms of group holds for $O(n)$.
+		\begin{enumerate}
+			\item (Associativity) Since matrix multiplication is associative, for any $A,B,C \in O(n),$ we have $$A(BC) = (AB)C.$$
+			\item (Existence of the Identity) Clearly $I_2 \in O(n)$ since it is orthogonal. Also, for any $A \in O(n)$, $I_2$ is the unique element such that
+			$$AI_2 = I_2A = A.$$
+			\item (Existence of a two-sided inverse) For any $A \in O(n),$ let $A^{-1}$ be the inverse of A. For orthogonal matrices, the inverse is the transpose. So
+			$A^{-1}(A^{-1})^t = A^tA =AA^t = I_2$ and hence $A^{-1} \in O(n)$ By definition of inverse,
+			$$AA^{-1}=A^{-1}A = I_2.$$
+		\end{enumerate}
+		Since each axiom holds. Therefore, $O(n)$ is indeed a group.
+	\end{proof}
+	
+	\section{Cyclic Subgroups of G}
+	For any matrix $A \in G,$ Denote A by $A_\theta$ if A has parameter $\theta.$
+	
+	\begin{definition}
+		If G is a group and $a\in G,$ define the \textbf{powers} of a as follows:
+			$$a^0 = 1$$
+		and for all $k \geq 0:$
+		$$
+			a^{k+1} = aa^{k} \quad \text{and} \quad a^{-k} = (a^{-1})^k.
+		$$
+	\end{definition}
+	
+	\begin{definition}
+		If G is a group and $a\in G,$ then the \textbf{cyclic subgroup generated by a}, denoted by $<a>$ is the set of all powers of a A group G is called \textbf{cyclic} if there is $a \in G$ with $G = <a>.$
+	\end{definition}
+	
+	\vspace{5mm}
+	We consider the cyclic subgroups in $O(2)^+$ and $O(2)^-$ seperately. 
+	To find the cyclic subgroups of $O(2)^+$ up to isomorphism, we begin by determining which matrices are isomorphic.
+	\begin{lemma}
+		For any $A_{\theta} \in O(2)^+$ and $\theta \in [0,2\pi),$ we have 
+		$(A_\theta)^2 = A_{2\theta}.$
+	\end{lemma}
+	\begin{proof}
+		We have
+		\begin{align*}
+			(A_\theta)^2 &= (A_\theta)(A_\theta)\\
+			&= 
+			\begin{pmatrix}
+				\cos \theta & \sin \theta \\ 
+				-\sin \theta & \cos \theta
+			\end{pmatrix}
+			\begin{pmatrix}
+				\cos \theta & \sin \theta \\ 
+				-\sin \theta & \cos \theta
+			\end{pmatrix}\\
+			&=
+			\begin{pmatrix}
+				\cos^2 \theta - sin^2 \theta & 2\sin \theta \cos \theta\\ 
+				-2 \sin \theta \cos \theta & \cos^2 \theta -\sin^2 \theta
+			\end{pmatrix}\\
+			&=
+			\begin{pmatrix}
+				\cos 2\theta & \sin 2\theta \\
+				-\sin 2 \theta & \cos 2\theta.
+			\end{pmatrix}
+		\end{align*}
+	\end{proof}
+	
+	By induction we can show that for any integers k and any matrix $A_{\theta}$ in $O(n)^+$ we have $(A_\theta)^k = A_{k\theta}.$ Observe that higher powers of  A  will eventually represent the same transformation as $I_2.$ In particular, after $\lfloor\frac{2\pi}{\theta}\rfloor$ rotations, where $\lfloor\frac{2\pi}{\theta}\rfloor$ is the largest integer less than or equal to $\frac{2\pi}{\theta},$ the transformation will be the same as $I_2.$ This implies that the cyclic subgroups in $O(2)^+$ contain only finitely many elements.
+	
+	\begin{theorem}
+	For any $A_\theta \in O(2)^+,$ the cyclic subgroup generated by $A_\theta$ is
+	\begin{align*}
+	<A_\theta> =
+	\begin{cases}
+		\{I_2\} &\text{if $\theta = 0$}\\
+		\{I_2, A_\theta, A_\theta^2, A_\theta^3, \cdots, A_\theta^{\lfloor\frac{2\pi}{\theta}\rfloor}\}
+		&\text{if 	$\theta \not = 0:$}
+	\end{cases}
+	\end{align*}
+	\end{theorem} 
+	
+	\vspace{5mm}
+	Consider $A_\theta \in O(2)^-.$ This corresponds to an orthogonal matrix that reflects any vector across a line through the origin at an angle $\frac{\theta}{2}.$
+	
+	\begin{lemma}
+		For any $A_{\theta} \in O(2)^-,$ $$A_\theta^2 = I_2.$$
+	\end{lemma}
+	\begin{proof}
+		\begin{align*}
+			A_\theta^2 =
+			\begin{pmatrix}
+				\cos \theta & \sin \theta \\
+				\sin \theta & -\cos \theta
+			\end{pmatrix}
+			\begin{pmatrix}
+				\cos \theta & \sin \theta \\
+				\sin \theta & -\cos \theta
+			\end{pmatrix}
+			=
+			\begin{pmatrix}
+				1 & 0\\
+				0& 1
+			\end{pmatrix}
+			= I_2.
+		\end{align*}
+	\end{proof}
+	By induction, we can show that for any integer k, $A_{\theta}^2k = I_2$ and $A_{\theta} ^ {2k+1} = A_\theta.$ So the cyclic subgroup generated by $A_\theta$ will consist of only two elements: $I_2$ and $A_{\theta}.$
+	
+	\begin{theorem}
+		For any $A_\theta \in O(2)^-,$ the cyclic subgroup generated by $A_\theta$ is 
+		\begin{align*}
+			<A_\theta> =
+		\begin{cases}
+		\{I_2\} & \text{if $\theta = 0$ and}\\
+		\{I_2, A_\theta\} &\text{if $\theta \not = 0.$}
+		\end{cases}
+\end{align*}
+	\end{theorem}
+	
+	\begin{thebibliography}{widest-label}
+			\bibitem{baker}
+			A. Baker
+			\newblock \emph{Matrix Groups: An Introduction to Lie Group Theory}
+			\newblock Springer-Verlag, London, 2002.
+			
+			\bibitem{rotman}
+			J.J Rotman
+			\newblock \emph{An Introduction to the Theory of Groups}.
+			Fourth Edition
+			\newblock Springer-Verlag, New York, 1995.
+			
+			
+	\end{thebibliography}
+
+\end{document}
