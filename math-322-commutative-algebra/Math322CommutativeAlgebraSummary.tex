@@ -8,6 +8,9 @@
 \newcommand{\zpol}{\mathbb{Z}[x]}
 \newcommand{\pol}[2]{#1[#2]}
 \newcommand{\nonzeroset}[1]{#1 \backslash \{0\}}
+\newcommand{\setwithzero}[1]{#1_{0}}
+\newcommand{\letter}[1]{$#1$}
+\newcommand{\seq}[2]{#1_{1}, #1_{2}, \ldots #1_{#2}}
 
 
 \begin{document}
@@ -56,12 +59,12 @@
 			\item Polynomial rings in one variable over a field
 		\end{enumerate}
 		
-		\item \textbf{Euclidean Function} Let $R$ be an integral domain. A Euclidean Function on $R$ is a function $v: R \backslash \{0\} \rightarrow \mathbb{N}_0$ sucht that the following hold:
+		\item \textbf{Euclidean Function} Let \letter{R} be an integral domain. A Euclidean Function on \letter{R} is a function $v: R \backslash \{0\} \rightarrow \mathbb{N}_0$ such that the following hold:
 					\begin{enumerate}[label=(\roman*)]
 						\item $v(ab) \geq v(a)$ for all $a,b\in R \backslash \{0\}$
 						\item for any $a\in R$ and any $b\in R \backslash \{0\},$ there exists $q,r\in R$ such that $a=qb+r$ and either $r=0$ or $v(r)<v(b)$
 					\end{enumerate}
-		\item \textbf{Euclidean Domain} ID $R$ such that there is a Euclidean Function on $R.$
+		\item \textbf{Euclidean Domain} ID \letter{R} such that there is a Euclidean Function on \letter{R.}
 		
 		\item \textit{Important ED:}
 		Ring of Gaussian integers $\pol{\z}{i}=\{a+bi: a,b\in \mathbb{Z}\}$ paired with the Euclidean Function 
@@ -70,11 +73,11 @@
 		\item ED $\implies$ PID
 		
 		\item \textit{Important theorem relating a ring and its polynomial ring}
-		Let $R$ be a ring and $\rpol$ the polynomial ring over $R$. TFAE
+		Let \letter{R} be a ring and $\rpol$ the polynomial ring over \letter{R}. TFAE
 					\begin{enumerate}[label=(\roman*)]
 						\item $\rpol$ is a ED
 						\item $\rpol$ is a PID
-						\item $\rpol$ is a field
+						\item $R$ is a field
 					\end{enumerate}
 					
 		\item \textit{Non-example to above theorem}
@@ -104,16 +107,42 @@
 			\item The relation `$a$ is associated to $b$ in $R$` is an equivalence relation
 		\end{itemize}
 		
-		\item \textit{Characterisation of invertible elements of a polynomial IDs} Let $R$ be an ID. Then $\inv{\rpol}=\inv{R}$ (All	 the invertible elements in $\rpol$ are the constant polynomials.
+		\item \textit{Characterisation of invertible elements of a polynomial IDs} Let \letter{R} an ID. Then $\inv{\rpol}=\inv{R}$ (All	 the invertible elements in $\rpol$ are the constant polynomials.
 		
 		\item \textit{Characterisation of invertible elements of a ED}
 		Let $R$ be a ED with Euclidean function $v.$ The following hold
 		\begin{enumerate}[label=(\roman*)]
-			\item $v(1) =\{v(a): a \in \nonzeroset{R}\}$\\
+			\item $v(1) =\{v(a): a \in \nonzeroset{R}\}$
 			\item $a\in R$ is invertible if and only if $v(a)=v(1).$
 		\end{enumerate}
-	\end{itemize} 
+		
+		\item Every field has an infinite (countably) many Euclidean Funcitons.
+		
+		For any field \letter{R}, show the constant function 
+		$$v_n: \nonzeroset{R} \rightarrow \setwithzero{\mathbb{N}}, \quad v_n(a)=n, \quad \forall a\in \nonzeroset{R}$$
+		is a Euclidean function.
+		
+		\item \textbf{Common Divisor/Greatest Common Divisor}
+		
+		Let \letter{R} be a commutative ring and $\seq{a}{n} \in R \quad (n \geq 2.)$
+		
+		An element $a \in R$ is a common divisor of $\seq{a}{n}$ if $d | a_i$ for all $i.$ It is a greatest common divisor if it is a common divisor of $\seq{a}{n}$ and any common divisor $c$ is also a divisor of $d$ 
+		
+		\item \textit{Nice result about GCDs} 
+		
+		Let \letter{R} be an ID and $\seq{a}{n} \in R.$ Suppose that $\gcd(\seq{a}{n})$ exists in \letter{R}, say $d =\gcd(\seq{a}{n}) \in R.$
+		
+	\begin{enumerate}[label=(\roman*)]
+		\item  Any gcd of $\seq{a}{n}$ is associated to \letter{d}
+		\item \letter{d} divides any $R-$linear combination of $\seq{a}{n}.$ If an $R-$linear combination od $\seq{a}{n}$ is a common divisior of $\seq{a}{n}$ then it is a gcd of $\seq{a}{n}.$
+	\end{enumerate}
 	
+	\item \textit{Euclidean Algorithm} Let \letter{R} be a Euclidean domain with Euclidean function \letter{v}. Let $a,b\in R$ and suppose that $v(a) \geq v(b).$ By definition of Euclidean Domain, there exists $q_1, r_1 \in R$ such that 
+	$$a=q_1b+r_1, \quad \text{and} \quad r_1=0 \quad \text{or} \quad v(r_1)<v(b)$$
+	
+	If $r_1=0$ then $b|a$ and so $b=\gcd(a,b).$ Otherwise repeat the above process defining $q_2, r_2$ similarly unitl we eventually reach $r_n=0.$
+	\end{itemize}
+
 	
 	
 \end{document}
